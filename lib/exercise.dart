@@ -1,15 +1,19 @@
-import 'pair.dart';
-
 class Exercise {
     String name;
     int weight;
     int reps;
     int sets;
-    String day;
+    Day? day;
     final List<Pair> log = [];
     DateTime? lastChange;  // cell will be continuously mapped w color based on days
     
     Exercise(this.name, this.weight, this.reps, this.sets, this.day);
+
+    void changeDay(Day newDay) {
+        day?.removeExercise(this);
+        day = newDay;
+        newDay.addExercise(this);
+    }
 
     void updateWeight(int newWeight) {
         weight = newWeight;
@@ -35,24 +39,34 @@ class Exercise {
     }
 }
 
+class Day {
+    String name;
+    final List<Exercise> exercises = [];
 
+    Day(this.name);
 
+    void addExercise(Exercise exercise) {
+        if (!exercises.contains(exercise)) {
+            exercises.add(exercise);
+            exercise.day = this; // update exercise’s day reference
+        }
+    }
 
-/*
-main points
-construct the graph from the available data points (date-weight)
-months / days on the x axis
-kg on the y axis
-easily scalable x and y axis, y from zero to max weight + 10
-x from 0 to date of last change
-y from 0 to max weight + 10
+    void removeExercise(Exercise exercise) {
+        if (exercises.remove(exercise)) {
+            exercise.day = null; // clear the exercise’s day reference
+        }
+    }
 
-class ItemList:
-    def __init__(self, items=None):
-        self.items = items or []
+    List<String> get exerciseNames => exercises.map((e) => e.name).toList();
+}
 
-    def add(self, item):
-        self.items.append(item)
+class Pair {
+  final DateTime first;
+  final int second;
 
-    def filter(self, attr_type, value=None):
-        return [item for item in self.items if item.has_attribute(attr_type, value)] 
+  Pair(this.first, this.second);
+
+  @override
+  String toString() => '($first, $second)';
+}
