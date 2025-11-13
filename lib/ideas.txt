@@ -1,9 +1,13 @@
 at the top:
-search bar, that goes showing results live
-below that, all of the days in little selectable boxes to filter exercises
-in the top right, a little plus button to add an exercise and it opens a pop up to imput all the data
+
+block that contains the 8 days in 2 rows you select the day
+
+
+in the top right, a little plus button to add an exercise to that day and it opens a pop up to input all the data
+
+
 click each thing to edit it, but i gotta make weight exciting to edit somehow. a little animation or something
-possibly related to the color of the cell which becomes increasingly red w time without weight change, 
+possibly related to the color of the cell which becomes increasingly red w time without weight change, make progressive overload a toggleable on off 
 so something that makes it tremendously satisfying to see the color fade away.
 
 long hold on exercise to remove it
